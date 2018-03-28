@@ -41,3 +41,7 @@ group :development do
 end
 
 gem 'devise'
+
+gem 'bootstrap-sass'
+
+gem 'font-awesome-rails'
