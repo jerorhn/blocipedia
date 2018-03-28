@@ -13,6 +13,8 @@
     <div class="container">
       <ul class="nav nav-pills">
         <li class="nav-item"><%= link_to "Blocipedia", root_path %></li>
+        <li class="nav-item"><%= link_to "My Wikis", wikis_path %></li>
+
         <% if user_signed_in? %>
           <li class="nav-item pull-right"><%= link_to "Sign Out", destroy_user_session_path, method: :delete%></li>
           <li class="nav-item pull-right"><%= link_to "Edit profile", edit_user_registration_path %></li>
@@ -23,8 +25,18 @@
         <% end %>
       </ul>
 
+      <% if flash[:notice] %>
+         <div class="alert alert-success">
+           <%= flash[:notice] %>
+         </div>
+       <% elsif flash[:alert] %>
+         <div class="alert alert-warning">
+           <%= flash[:alert] %>
+         </div>
+       <% end %>
+
       <%= yield %>
-      
+
     </div>
   </body>
 </html>
