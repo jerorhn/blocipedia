@@ -1,6 +1,9 @@
 class WikisController < ApplicationController
   before_action :authenticate_user!
 
+  before_action :auth_user, only: [:show, :edit, :update]
+  before_action :auth_premium, only: [:destroy]
+
   def index
     @wikis = Wiki.all
   end
@@ -58,4 +61,23 @@ class WikisController < ApplicationController
     end
   end
 
+  private
+
+  def auth_user
+    wiki = Wiki.find(params[:id])
+
+    unless current_user.admin? || !wiki.private || current_user == wiki.user
+      flash[:alert] = "You do not have access to that option."
+      redirect_to wiki_path
+    end
+  end
+
+  def auth_premium
+    wiki = Wiki.find(params[:id])
+
+    unless current_user.admin? || current_user == wiki.user
+      flash[:alert] = "You do not have access to that option."
+      redirect_to wiki_path
+    end
+  end
 end

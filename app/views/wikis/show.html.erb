@@ -1,6 +1,6 @@
 <h1><%= @wiki.title %> </h1>
   <small>
-    submitted <%= time_ago_in_words(@wiki.created_at) %>
+    submitted <%= time_ago_in_words(@wiki.created_at) %> ago by <%= "#{@wiki.user.email}" %>
   </small>
 
 <div class="row">
@@ -9,5 +9,7 @@
   </div>
 <div class="col-md-4">
   <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success' %>
-  <%= link_to "Delete Wiki", @wiki, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  <% if user_is_authorized_for_delete?(@wiki) %>
+    <%= link_to "Delete Wiki", @wiki, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  <% end %>
 </div>
