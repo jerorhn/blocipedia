@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   after_initialize { self.role ||= :standard }
 
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :confirmable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   enum role: [:standard, :premium, :admin]

@@ -17,10 +17,7 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = Wiki.new
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
-    @wiki.private = params[:wiki][:private]
+    @wiki = Wiki.create(wiki_params)
     @wiki.user = current_user
 
     if @wiki.save
@@ -38,9 +35,7 @@ class WikisController < ApplicationController
 
   def update
     @wiki = Wiki.find(params[:id])
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
-    @wiki.private = params[:wiki][:private]
+    @wiki.update!(wiki_params)
 
     if @wiki.save
       flash[:notice] = "Wiki was updated!"
@@ -81,5 +76,9 @@ class WikisController < ApplicationController
       flash[:alert] = "You do not have access to that option."
       redirect_to wiki_path
     end
+  end
+
+  def wiki_params
+    params.require(:wiki).permit(:title, :body, :private)
   end
 end
