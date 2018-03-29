@@ -47,3 +47,7 @@ gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 
 gem 'faker'
+
+gem 'stripe'
+
+gem 'figaro', '1.0'

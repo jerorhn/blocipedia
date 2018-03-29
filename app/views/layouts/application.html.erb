@@ -15,6 +15,10 @@
         <li class="nav-item"><%= link_to "Blocipedia", root_path %></li>
         <li class="nav-item"><%= link_to "Wikis", wikis_path %></li>
 
+        <% if current_user && current_user.standard? %>
+          <li class="nav-item"><button type="button" class="btn btn-success"> <%= link_to "Upgrade to Premium!", new_charge_path %></button></li>
+        <% end %>
+
         <% if user_signed_in? %>
           <li class="nav-item pull-right"><%= link_to "Sign Out", destroy_user_session_path, method: :delete%></li>
           <li class="nav-item pull-right"><%= link_to "Edit profile", edit_user_registration_path %></li>
