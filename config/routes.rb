@@ -5,5 +5,7 @@ Rails.application.routes.draw do
 
   resources :charges
 
+  post 'downgrade', to: 'welcome#downgrade'
+
   root 'welcome#index'
 end
