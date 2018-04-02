@@ -12,6 +12,24 @@
   </tbody>
 </table>
 
+<h1>My Collaborated Wikis</h1>
+
+<table class="table">
+  <tbody>
+    <% @wikis.each do |wiki| %>
+      <% wiki.collaborators.each do |collaborator| %>
+        <% if collaborator.user_id == current_user.id %>
+          <tr>
+            <td><%= link_to wiki.title, wiki_path(wiki.id) %></td>
+            <td><%= link_to "edit", edit_wiki_path(wiki.id), class: 'btn btn-success' %></td>
+            <td><%= link_to "delete", wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
 
 <h1>All Wikis</h1>
 

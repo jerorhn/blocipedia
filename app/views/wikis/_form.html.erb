@@ -21,7 +21,7 @@
       <%= f.text_area :body, class: 'form-control', placeholder: "Enter Wiki Body" %>
     <% end %>
 
-    <% if user_is_authorized_for_private? %>
+    <% if user_is_authorized_for_private? && wiki.id == nil %>
       <div class="form-group">
         <%= f.label :private , class: 'checkbox' do %>
           <%= f.check_box :private %> Private Wiki

@@ -63,7 +63,7 @@ class WikisController < ApplicationController
   def auth_user
     wiki = Wiki.find(params[:id])
 
-    unless current_user.admin? || !wiki.private || current_user == wiki.user
+    unless current_user.admin? || !wiki.private || current_user == wiki.user || wiki.collaborators.exists?(user_id: current_user.id)
       flash[:alert] = "You do not have access to that option."
       redirect_to wiki_path
     end
